@@ -1,0 +1,39 @@
+title Full Stack Open - New Note
+
+note over browser
+User fills in note text input and
+clicks "save" (submit) button
+end note
+
+browser->server: HTTP POST https://fullstack-exampleapp.herokuapp.com/new_note
+
+note right of browser
+Contains form data, e.g.:
+    {note: "My new note"}
+end note
+
+note over server
+push new note into notes array, e.g.:
+    {content: "My new note", date: new Date()}
+end note
+
+server->browser: Redirect: HTTP 302 https://fullstack-exampleapp.herokuapp.com/notes
+
+browser->server: HTTP GET https://fullstack-exampleapp.herokuapp.com/notes
+server-->browser: HTML
+browser->server: HTTP GET https://fullstack-exampleapp.herokuapp.com/main.css
+server-->browser: main.css
+browser->server: HTTP GET https://fullstack-exampleapp.herokuapp.com/main.js
+server-->browser: main.js
+
+browser->server: HTTP GET https://fullstack-exampleapp.herokuapp.com/data.json
+server-->browser: Array of notes
+
+note left of server
+E.g. [{ content: "HTML is easy", date: "2019-05-23" }, ...]
+end note
+
+note over browser
+xhttp.onreadystatechange renders notes list 
+when response is received from server.
+end note
